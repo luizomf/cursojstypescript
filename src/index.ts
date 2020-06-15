@@ -1,2 +1,3 @@
-const nome = 'Luiz';
-const sobrenome = 'Otávio';
+import funcao from './mod';
+
+funcao();
