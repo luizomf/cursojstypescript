@@ -1,0 +1,5 @@
+{
+  "code-runner.executorMap": {
+    "typescript": "npx ts-node --files --transpile-only",
+  }
+}
