@@ -3,3 +3,6 @@ export function criaErro(): never {
 }
 
 criaErro();
+
+// Module mode
+export default 1;

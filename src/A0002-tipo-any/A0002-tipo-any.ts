@@ -6,3 +6,6 @@ function showMessage(msg: any) {
 console.log(showMessage([1, 2, 3]));
 console.log(showMessage('Olá'));
 console.log(showMessage(1));
+
+// Module mode
+export default 1;

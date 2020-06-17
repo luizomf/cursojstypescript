@@ -18,3 +18,6 @@ const array2: ReadonlyArray<string> = ['Luiz', 'Otávio'];
 
 console.log(array1);
 console.log(array2);
+
+// Module mode
+export default 1;

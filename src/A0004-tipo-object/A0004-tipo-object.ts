@@ -13,3 +13,6 @@ objetoA.chaveC = 'Novo valor';
 objetoA.chaveD = 'Nova chave';
 
 console.log(objetoA);
+
+// Module mode
+export default 1;
