@@ -8,10 +8,7 @@ const pessoa = {
   sobrenome: 'Miranda',
 };
 
-function escolhaCor(cor: 'Vermelho' | 'Amarelo' | 'Azul'): string {
+export function escolhaCor(cor: 'Vermelho' | 'Amarelo' | 'Azul'): string {
   return cor;
 }
 console.log(escolhaCor('Vermelho'), pessoa, x, y);
-
-// Module mode
-export default 1;
