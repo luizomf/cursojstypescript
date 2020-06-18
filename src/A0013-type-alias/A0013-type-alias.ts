@@ -5,7 +5,7 @@ type Pessoa = {
   salario: number;
   corPreferida?: string;
 };
-type CorRGB = 'Vermelho' | 'Verde' | 'Azul';
+type CorRGB = 'Vermelho' | 'Verde' | 'Azul'; // OR
 type CorCMYK = 'Ciano' | 'Magenta' | 'Amarelo' | 'Preto';
 type CorPreferida = CorRGB | CorCMYK;
 
