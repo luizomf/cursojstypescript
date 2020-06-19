@@ -3,5 +3,6 @@
   "window.zoomLevel": 2,
   "code-runner.executorMap": {
     "typescript": "clear && npx ts-node --files --transpile-only",
-  }
+  },
+  "liveServer.settings.port": 5501
 }
