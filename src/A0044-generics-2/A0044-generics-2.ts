@@ -7,7 +7,7 @@ async function promiseAsync() {
   return 1;
 }
 
-function minhaPromise(): Promise<MeuTipo | number> {
+export function minhaPromise(): Promise<MeuTipo | number> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(1);
