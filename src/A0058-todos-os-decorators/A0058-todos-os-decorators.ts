@@ -7,6 +7,11 @@ function decoradorDeClasse(construtor: Constructor): any {
   console.log('CLASSE');
   console.log(construtor);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return class extends construtor {
+    // faça o que desejar
+  };
 }
 
 // Método de instância (normal)
@@ -21,6 +26,15 @@ function decoradorDeMetodo(
   console.log(nomeDoMetodo);
   console.log(descritorDePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return {
+    // value altera o retorno original:
+    // value: (...args: any[]) => console.log(args),
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  };
 }
 
 // Método estático
@@ -35,6 +49,15 @@ function decoradorDeMetodoEstatico(
   console.log(nomeDoMetodo);
   console.log(descritorDePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return {
+    // value altera o retorno original:
+    // value: (...args: any[]) => console.log(args),
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  };
 }
 
 // Parâmetro de método
@@ -49,6 +72,8 @@ function decoradorDeParametroDeMetodo(
   console.log(nomeDoMetodo);
   console.log(indiceDaPropriedade);
   console.log('###');
+
+  // Retorno é ignorado
 }
 
 // Parâmetro de método estático
@@ -63,6 +88,8 @@ function decoradorDeParametroDeMetodoEstatico(
   console.log(nomeDoMetodo);
   console.log(indiceDaPropriedade);
   console.log('###');
+
+  // Retorno é ignorado
 }
 
 // Propriedade
@@ -75,11 +102,27 @@ function decoradorDePropriedade(
   console.log(prototipoDaClasse);
   console.log(nomePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  // Use get e set para manipular o valor da propriedade
+  let valorPropriedade: any;
+  return {
+    enumerable: true,
+    configurable: true,
+    get: () => valorPropriedade,
+    set: (valor: any) => {
+      if (typeof valor === 'string') {
+        valorPropriedade = valor.split('').reverse().join('');
+        return;
+      }
+      valorPropriedade = valor;
+    },
+  };
 }
 
 // Propriedade estática
 function decoradorDePropriedadeEstatica(
-  classConstructor: Constructor,
+  classConstructor: any,
   nomePropriedade: string,
 ): any {
   // Chamado na criação da propriedade estática
@@ -87,6 +130,15 @@ function decoradorDePropriedadeEstatica(
   console.log(classConstructor);
   console.log(nomePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return {
+    // value altera o retorno original:
+    // value: classConstructor[nomePropriedade],
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  };
 }
 
 // Getter/Setter
@@ -102,6 +154,13 @@ function decoradorDeGetterESetterNormal(
   console.log(nomePropriedade);
   console.log(descritorDePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return {
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  };
 }
 
 // Getter/Setter estático
@@ -117,6 +176,13 @@ function decoradorDeGetterESetterEstatico(
   console.log(nomePropriedade);
   console.log(descritorDePropriedade);
   console.log('###');
+
+  // Retorno pode ser omitido
+  return {
+    writable: true,
+    enumerable: true,
+    configurable: true,
+  };
 }
 
 // A classe e o uso dos decorators
@@ -129,7 +195,7 @@ export class UmaPessoa {
   idade: number;
 
   @decoradorDePropriedadeEstatica
-  static propriedadeEstatica = '';
+  static propriedadeEstatica = 'VALOR PROPRIEDADE ESTÁTICA';
 
   constructor(nome: string, sobrenome: string, idade: number) {
     this.nome = nome;
@@ -146,14 +212,14 @@ export class UmaPessoa {
   static metodoEstatico(
     @decoradorDeParametroDeMetodoEstatico msg: string,
   ): string {
-    return UmaPessoa.propriedadeEstatica + msg;
+    return UmaPessoa.propriedadeEstatica + ' - ' + msg;
   }
 
-  @decoradorDeGetterESetterNormal
   get nomeCompleto(): string {
     return this.nome + ' ' + this.sobrenome;
   }
 
+  @decoradorDeGetterESetterNormal
   set nomeCompleto(valor: string) {
     const palavras = valor.split(/\s+/g);
     const primeiroNome = palavras.shift();
@@ -175,5 +241,10 @@ export class UmaPessoa {
 // Uso da classe
 
 const pessoa = new UmaPessoa('Luiz', 'Otávio', 30);
+pessoa.nomeCompleto = 'João Silva Oliveira';
 const metodo = pessoa.metodo('Olá mundo!');
+const metodoEstatico = UmaPessoa.metodoEstatico('Olá mundo!');
+console.log(pessoa);
 console.log(metodo);
+console.log(metodoEstatico);
+console.log(UmaPessoa.propriedadeEstatica);
