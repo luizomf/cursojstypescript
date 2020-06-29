@@ -52,9 +52,7 @@ function decoradorDeMetodoEstatico(
 
   // Retorno pode ser omitido
   return {
-    // value altera o retorno original:
-    // value: (...args: any[]) => console.log(args),
-    writable: true,
+    // Use get/set OU value
     enumerable: true,
     configurable: true,
   };
@@ -133,9 +131,7 @@ function decoradorDePropriedadeEstatica(
 
   // Retorno pode ser omitido
   return {
-    // value altera o retorno original:
-    // value: classConstructor[nomePropriedade],
-    writable: true,
+    // Use get/set OU value
     enumerable: true,
     configurable: true,
   };
@@ -157,7 +153,7 @@ function decoradorDeGetterESetterNormal(
 
   // Retorno pode ser omitido
   return {
-    writable: true,
+    // Use get/set OU value
     enumerable: true,
     configurable: true,
   };
@@ -179,7 +175,7 @@ function decoradorDeGetterESetterEstatico(
 
   // Retorno pode ser omitido
   return {
-    writable: true,
+    // Use get/set OU value
     enumerable: true,
     configurable: true,
   };
