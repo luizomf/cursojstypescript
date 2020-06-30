@@ -12,3 +12,5 @@ namespace MeuNamespace {
     export const nomeDoNamespace = 'Nome no outro namespace';
   }
 }
+
+const constDoNamespace = 'Valor da const do namespace';
